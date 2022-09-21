@@ -10,14 +10,15 @@ const initialState = {
 };
 
 // async thunk
-export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
-    const videos = await getVideos();
+export const fetchVideos = createAsyncThunk("videos/fetchVideos", async ({tags,search,author}) => {
+    const videos = await getVideos(tags,search,author);
     return videos;
 });
 
 const videoSlice = createSlice({
     name: "videos",
     initialState,
+    
     extraReducers: (builder) => {
         builder
             .addCase(fetchVideos.pending, (state) => {
@@ -38,3 +39,4 @@ const videoSlice = createSlice({
 });
 
 export default videoSlice.reducer;
+export const { increment } = videoSlice.actions;

@@ -1,7 +1,15 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { filterAuthor } from "../../features/filter/FilterSlice";
 
 export default function VideoGridItem({ video }) {
-    const {id,title,author,avatar,duration,views,thumbnail} =video
+    const { id, title, author, avatar, duration, views, thumbnail } = video;
+    const dispatch = useDispatch()
+
+    const filterByAuthor = (author) => {
+        dispatch(filterAuthor(author));
+      };
+
     return (
         <div className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]">
             <div className="w-full flex flex-col">
@@ -34,12 +42,12 @@ export default function VideoGridItem({ video }) {
                                 {title}
                             </p>
                         </Link>
-                        <Link
-                            className="text-gray-400 text-xs mt-2 hover:text-gray-600"
-                            to={`videos/${id}`}
+                        <p
+                            className="cursor-pointer text-gray-400 text-xs mt-2 hover:text-gray-600"
+                            onClick={() => filterByAuthor(author)}
                         >
                             {author}
-                        </Link>
+                        </p>
                         <p className="text-gray-400 text-xs mt-1">
                             {views}
                         </p>
