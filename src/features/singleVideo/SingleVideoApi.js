@@ -7,17 +7,24 @@ export const getSingleVideo = async (id) => {
 };
 
 
-// export const updateReaction = async ({id,reaction}) => {
-//   const { data } = await axios.get(`/videos/${id}`);
+export const updateLike = async (id) => {
+  const { data } = await axios.get(`/videos/${id}`);
 
-//   if (data) {
-//     let reactionCount = 
-//       reaction === 'like' ? {
-//         likes: data.likes + 1
-//       } : {
-//       unlikes:data.unlikes +1 
-//       }
-//      const response = await axios.get(`/videos/${id}`,reactionCount);
-//     return response.data
-//   }
-// }
+  if (data) {
+    const response = await axios.patch(`/videos/${id}`, {
+      likes: data.likes + 1,
+     });
+    return response.data
+  }
+}
+
+export const updateUnLikes = async (id) => {
+  const { data } = await axios.get(`/videos/${id}`);
+
+  if (data) {
+    const response = await axios.patch(`/videos/${id}`, {
+      unlikes: data.unlikes + 1,
+     });
+    return response.data
+  }
+}

@@ -15,7 +15,7 @@ export default function VideGrid() {
     var count = Math.ceil(videos.length / perPage);
     dispatch(setPageCount(count));
     setPartialData();
-  }, [dispatch, tags, search, author, perPage, videos.length]);
+  }, [dispatch, tags, search, author, perPage, videos.length,offset]);
   
   const setPartialData = () =>  {
     const partialData = videos.slice(offset, offset + perPage);
@@ -34,7 +34,7 @@ export default function VideGrid() {
   }
 
   if (!isError && !isLoading && videos?.length > 0) {
-    content = partialVideo.map((video) => (
+    content = partialVideo?.map((video) => (
       <VideoGridItem key={video.id} video={video} />
     ));
   }
