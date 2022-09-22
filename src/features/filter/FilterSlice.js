@@ -4,6 +4,10 @@ const initialState = {
   tags: [],
   search: "",
   author: null,
+  partialVideo: [],
+  perPage: 2,
+  pageCount: 1,
+  offset:0,
 };
 
 const filterSlice = createSlice({
@@ -35,8 +39,20 @@ const filterSlice = createSlice({
       state.search ="";
       state.author = null;
     },
+    setPartialVideo: (state,action) => {
+      state.partialVideo = action.payload
+    },
+    setOffset : (state,action) => {
+      state.offset = action.payload
+    },
+    setPageCount: (state,action) => {
+      state.pageCount = action.payload
+    },
+    SetPerpageAction : (state,action) => {
+      state.perPage = action.payload
+    },
   },
 });
 
 export default filterSlice.reducer;
-export const { tagSelected, tagRemoved, searched,filterAuthor,resetFilter } = filterSlice.actions;
+export const { tagSelected, tagRemoved, searched,filterAuthor,resetFilter,setPartialVideo,setOffset,setPageCount,SetPerpageAction} = filterSlice.actions;

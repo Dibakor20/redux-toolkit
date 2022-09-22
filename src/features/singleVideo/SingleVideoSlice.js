@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getSingleVideo } from "./SingleVideoApi";
+import { getSingleVideo, updateReaction} from "./SingleVideoApi";
 
 const initialState = {
   video: {},
@@ -15,6 +15,16 @@ export const fetchSingleVideo = createAsyncThunk(
     return singleVideo;
   }
 );
+
+
+// export const fetchVideoReaction = createAsyncThunk(
+//   "singleVideo/fetchVideoReaction",
+//   async ({id,reaction}) => {
+//     const updateVideo = await updateReaction({id, reaction});
+//     return updateVideo;
+//   }
+// );
+
 
 const singleVideoSlice = createSlice({
   name: "singleVideo",
@@ -37,6 +47,19 @@ const singleVideoSlice = createSlice({
         state.video = {};
         state.error = action.error.message;
       });
+    
+      // builder
+      // .addCase(fetchVideoReaction.pending, (state) => {
+      //   return state
+      // })
+      // .addCase(fetchVideoReaction.fulfilled, (state, action) => {
+      //   state.video.likes = action.payload.likes
+      //   state.video.unlikes = action.payload.unlikes
+      // })
+      // .addCase(fetchVideoReaction.rejected, (state, action) => {
+      //   return state
+      // });
+  
   },
 });
 

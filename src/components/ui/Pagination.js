@@ -1,20 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
+import ReactPaginate from 'react-paginate';
+import { setOffset } from "../../features/filter/FilterSlice";
+
 export default function Pagination() {
-    return (
-        <section className="pt-4">
-            <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 justify-end">
-                <div className="bg-blue-600 text-white px-4 py-1 rounded-full">
-                    1
-                </div>
-                <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full">
-                    2
-                </div>
-                <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full">
-                    3
-                </div>
-                <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full">
-                    4
-                </div>
-            </div>
-        </section>
-    );
+  const {perPage, pageCount} = useSelector((state) => state.filter)
+
+  const dispatch = useDispatch();
+
+  const handlePageSlected = e => {
+    dispatch(setOffset(e.selected * perPage));
+}
+ 
+  return (
+    <section className="pt-4">
+      <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 justify-end">
+        <ReactPaginate
+                className="job-pagination"
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageSlected}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+              />  
+      </div>
+    </section>
+  );
 }
