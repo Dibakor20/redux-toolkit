@@ -1,25 +1,6 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { searched } from "../../features/filter/FilterSlice";
-import { useMatch, useNavigate } from "react-router-dom";
 
-export default function Search() {
-  const dispatch = useDispatch();
-  const { search} = useSelector((state) => state.filter);
+export default function Search({handleSubmit,input,setInput}) {
 
-  const [input, setInput] = useState(search);
-
-  const match = useMatch("/");
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(searched(input));
-
-    if (!match) {
-      navigate("/");
-    }
-  };
   return (
     <form onSubmit={handleSubmit}>
       <input

@@ -4,8 +4,9 @@ const initialState = {
   tags: [],
   search: "",
   author: null,
+  isSelect:false,
   partialVideo: [],
-  perPage: 2,
+  perPage: 4,
   pageCount: 1,
   offset:0,
 };
@@ -17,6 +18,7 @@ const filterSlice = createSlice({
   reducers: {
     tagSelected: (state, action) => {
       state.tags.push(action.payload);
+      state.isSelect = true
     },
     tagRemoved: (state, action) => {
       const indexToRemove = state.tags.indexOf(action.payload);
@@ -24,20 +26,25 @@ const filterSlice = createSlice({
       if (indexToRemove !== -1) {
         state.tags.splice(indexToRemove, 1);
       }
+      state.isSelect = false
     },
     searched: (state, action) => {
       state.search = action.payload;
+      state.isSelect = true
     },
     filterAuthor: (state,action) => {
       state.author = action.payload
+      state.isSelect = true
     },
     removeAuthor: (state,action) => {
       state.author = null
+      state.isSelect = false
     },
     resetFilter: (state) => {
       state.tags = [];
       state.search ="";
       state.author = null;
+      state.isSelect= false
     },
     setPartialVideo: (state,action) => {
       state.partialVideo = action.payload

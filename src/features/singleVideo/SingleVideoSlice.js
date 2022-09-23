@@ -32,7 +32,6 @@ export const fetchVideoUnLike = createAsyncThunk(
   }
 );
 
-
 const singleVideoSlice = createSlice({
   name: "singleVideo",
   initialState,
